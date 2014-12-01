@@ -168,7 +168,7 @@ class lowermedia_phonenumber_settings
         ?>
         <div class="wrap">
             <?php screen_icon(); ?>
-            <h2>Canna Delivery Hotline</h2>           
+            <h2>Phone Number</h2>           
             <form method="post" action="options.php">
             <?php
                 // This prints out all hidden setting fields
