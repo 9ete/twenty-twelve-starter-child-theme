@@ -481,15 +481,15 @@
 /*
 #   Create widget info for above function: lm_add_dashboard_widgets
 */
-function lm_theme_info() {
-  echo "
-      <ul>
-      <li><strong>Developed By:</strong> LowerMedia.Net</li>
-      <li><strong>Website:</strong> <a href='http://lowermedia.net'>www.lowermedia.net</a></li>
-      <li><strong>Contact:</strong> <a href='mailto:pete.lower@gmail.com'>pete.lower@gmail.com</a></li>
-      </ul>"
-  ;
-}
+    function lm_theme_info() {
+      echo "
+          <ul>
+          <li><strong>Developed By:</strong> LowerMedia.Net</li>
+          <li><strong>Website:</strong> <a href='http://lowermedia.net'>www.lowermedia.net</a></li>
+          <li><strong>Contact:</strong> <a href='mailto:pete.lower@gmail.com'>pete.lower@gmail.com</a></li>
+          </ul>"
+      ;
+    }
 
 /*
 #
