@@ -130,15 +130,26 @@
 
     function lowermedia_scripts() {
         // wp_enqueue_script(
-        //     'continent-map',
-        //     get_stylesheet_directory_uri() . '/continentmap.js',
+        //     'custom-js',
+        //     get_stylesheet_directory_uri() . '/custom.js',
         //     array( 'jquery' )
         // );
+
+        // if (is_front_page()) {
         //     wp_enqueue_script(
-        //     'map-data',
-        //     get_stylesheet_directory_uri() . '/mapdata.js',
-        //     array( 'jquery' )
-        // );
+        //         'jssor',
+        //         get_stylesheet_directory_uri() . '/js/jssor.js',
+        //         array( 'jquery' )
+        //     );
+
+        //     wp_enqueue_script(
+        //         'jssorslider',
+        //         get_stylesheet_directory_uri() . '/js/jssor.slider.js',
+        //         array( 'jquery' )
+        //     );
+        // }
+
+        // wp_enqueue_script('jquery-ui-accordion');
     }
     add_action( 'wp_enqueue_scripts', 'lowermedia_scripts' );
 
@@ -332,7 +343,224 @@
 
 /*
 #
-#   END
+#   WHITE LABEL
+#
+*/
+
+    function lm_custom_admin_styles() {
+       echo '<style type="text/css">
+           /* Styles here! */
+            body {font-family: Futura, "Trebuchet MS", Arial, sans-serif;}
+
+           /*change sidebar icon for testimonials, staff, tips, videos */
+            #menu-posts-testimonials .dashicons-admin-post:before,
+            #menu-posts-testimonials .dashicons-format-standard:before { content:"\f155"; }
+
+            #menu-posts-staff .dashicons-admin-post:before,
+            #menu-posts-staff .dashicons-format-standard:before { content:"\f307"; }
+
+            #menu-posts-carcarevideos .dashicons-admin-post:before,
+            #menu-posts-carcarevideos .dashicons-format-standard:before { content:"\f126"; }
+
+            #menu-posts-carcaretips .dashicons-admin-post:before,
+            #menu-posts-carcaretips .dashicons-format-standard:before { content:"\f339"; }
+
+           
+           /*change admin menu coloring*/ 
+            #adminmenu, #adminmenu .wp-submenu, #adminmenuback, #adminmenuwrap { background-color: #043789; }
+
+            #adminmenu .wp-submenu a {color: rgba(249,190,25,0.6);}
+
+            #adminmenu .opensub .wp-submenu li.current a,
+            #adminmenu .wp-submenu li.current, 
+            #adminmenu .wp-submenu li.current a, 
+            #adminmenu .wp-submenu li.current a:focus, 
+            #adminmenu .wp-submenu li.current a:hover, 
+            #adminmenu a.wp-has-current-submenu:focus+.wp-submenu li.current a { color: rgba(249,190,25,1); }
+
+            #adminmenu li.menu-top:hover,
+            #adminmenu li.opensub>a.menu-top, 
+            #adminmenu li>a.menu-top:focus { background: linear-gradient(to bottom,#f9f9f9 37%,#c9c9c9 100%); }
+         </style>';
+    }
+    add_action('admin_head', 'lm_custom_admin_styles');
+
+    //* Replace WordPress login logo with your own
+    function lm_custom_login_logo() {
+        echo '<style type="text/css">
+        body { font-family: Futura, "Trebuchet MS", Arial, sans-serif; }
+        h1 a 
+        { 
+            background-image:url('.get_stylesheet_directory_uri().'/img/european-motors-menu-logo.png) !important; 
+            background-size: 211px auto !important;
+            height: 200px !important;
+            width: 311px !important; 
+            margin-bottom: 0 !important; 
+            padding-bottom: 0 !important; 
+        }
+        .login form { margin-top: 10px !important; border: 1px solid #f9be19; }
+        .login {background:#043789;}
+        </style>';
+    }
+    add_action('login_head', 'lm_custom_login_logo');
+
+    //* Change the URL of the WordPress login logo
+    function lm_url_login_logo(){ return get_bloginfo( 'wpurl' ); }
+    add_filter('login_headerurl', 'lm_url_login_logo');
+
+    //* Login Screen: Change login logo hover text
+    function lm_login_logo_url_title() { return 'A LowerMedia Site'; }
+    add_filter( 'login_headertitle', 'lm_login_logo_url_title' );
+
+    //* Login Screen: Don't inform user which piece of credential was incorrect
+    function lm_failed_login () { return 'The login information you have entered is incorrect. Please try again.'; }
+    add_filter ( 'login_errors', 'lm_failed_login' );
+
+    //* Modify the admin footer text
+    function lm_modify_footer_admin () { echo '<span id="footer-meta"><a href="http://lowermedia.net" target="_blank">A LowerMedia Site</a></span>'; }
+    add_filter('admin_footer_text', 'lm_modify_footer_admin');
+
+    //* Add theme info box into WordPress Dashboard
+    function lm_add_dashboard_widgets() { wp_add_dashboard_widget('wp_dashboard_widget', 'Theme Details', 'lm_theme_info'); }
+    add_action('wp_dashboard_setup', 'lm_add_dashboard_widgets' );
+
+/*
+#
+#   REGISTER SIDEBARS/WIDGET AREAS
 #   
+#
+*/
+
+    function lowermedia_widgets_init() {
+
+        // register_sidebar( array(
+        //     'name' => 'Pre Content Widget Area',
+        //     'id' => 'pre-content-widget',
+        //     'before_widget' => '<div id="pre-content-widget" class="pre-content-widget">',
+        //     'after_widget' => '</div>',
+        //     'before_title' => '<h2 class="rounded">',
+        //     'after_title' => '</h2>',
+        // ) );
+
+    }
+    add_action( 'widgets_init', 'lowermedia_widgets_init' );
+
+/*
+#
+#   REGISTER MENUS
+#   
+#
+*/
+
+    function lowermedia_menus_init() {
+      // register_nav_menus(
+      //   array(
+      //     'new-menu-name' => __( 'New Menu Name' ),
+      //     'other-menu-name' => __( 'Other Menu Name' )
+      //   )
+      // );
+    }
+    add_action( 'init', 'lowermedia_menus_init' );
+
+/*
+#
+#   SPEED OPTIMIZATIONS
+#   -Load all fonts from google
+#
+#
+*/
+
+    function load_fonts() {
+        wp_dequeue_style( 'twentytwelve-fonts' );
+        wp_deregister_style( 'twentytwelve-fonts' );
+        wp_register_style('googleFonts', 'http://fonts.googleapis.com/css?family=Signika:400,700|Open+Sans:400italic,700italic,400,700&amp;subset=latin,latin-ext');
+        wp_enqueue_style( 'googleFonts');
+    }
+    add_action('wp_print_styles', 'load_fonts');
+
+/*
+#   Create widget info for above function: lm_add_dashboard_widgets
+*/
+function lm_theme_info() {
+  echo "
+      <ul>
+      <li><strong>Developed By:</strong> LowerMedia.Net</li>
+      <li><strong>Website:</strong> <a href='http://lowermedia.net'>www.lowermedia.net</a></li>
+      <li><strong>Contact:</strong> <a href='mailto:pete.lower@gmail.com'>pete.lower@gmail.com</a></li>
+      </ul>"
+  ;
+}
+
+/*
+#
+#   ADD CUSTOM ADMIN LOGIN LOGO
+#
+*/
+
+    function custom_admin_logo() {
+        echo '
+            <style type="text/css">
+                #wp-admin-bar-wp-logo { display:none !important; }
+            </style>
+        ';
+    }
+    add_action('admin_head', 'custom_admin_logo');
+
+/*
+#
+#   MOVE ADMIN BAR TO BOTTOM ON FRONT END
+#
+*/
+    function lm_admin_bar_bottom() {
+        echo '
+            <style type="text/css">
+
+                html {
+                    margin-top: 28px !important;
+                }
+
+                .admin-bar {
+                    margin-top: -28px;
+                    padding-bottom: 28px;
+                }
+
+                #wpadminbar {
+                    top: auto !important;
+                    bottom: 0;
+                }
+
+                #wpadminbar .quicklinks>ul>li { position: relative; }
+
+                #wpadminbar .ab-top-menu>.menupop>.ab-sub-wrapper { bottom: 28px; }
+
+                #wp-admin-bar-wp-logo { display: none; }
+            </style>'
+        ;
+    }
+
+    function my_filter_head() {
+        remove_action('wp_head', '_admin_bar_bump_cb');
+    }
+
+    if(current_user_can( 'edit_posts' )) {
+        if(!is_admin()) {
+            if(!wp_is_mobile()) {
+                add_action('wp_head', 'lm_admin_bar_bottom');
+                add_action('get_header', 'my_filter_head');
+            }
+        }
+    }
+
+/*
+#
+#   ENABLE SHORTCODE IN WIDGETS
+#
+*/
+
+    add_filter('widget_text', 'do_shortcode');
+
+/*
+#
+#   END
 #
 */
