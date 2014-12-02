@@ -13,32 +13,9 @@
 /* =Theme customization starts here
 -------------------------------------------------------------- */
 
+body { background:white; }
 
-.site-content {
-	float:left;
-}
-
-body {background:white;}
 body .site {
 	box-shadow: none;
 	background: none;
 }
-
-@media screen and (min-width: 600px) {
-.main-navigation ul.nav-menu, .main-navigation div.nav-menu > ul {
-	border:none;
-	}
-}
-
-.site-header {
-	padding:0;
-	border-bottom: 1px solid #ededed;
-}
-
-hgroup {display:block;float:left;}
-
-hgroup {width:100%;margin:20px 0;}
-
-.site-header .site-title, 
-.site-header .site-description, 
-.site-header .site-phonenumber {text-align:right;}
