@@ -2,6 +2,43 @@
 
 /*
 #
+#   REGISTER JS AND CSS
+#
+*/
+
+    // function lowermedia_scripts() {
+        // wp_enqueue_script(
+        //     'custom-js',
+        //     get_stylesheet_directory_uri() . '/custom.js',
+        //     array( 'jquery' )
+        // );
+
+        // if (is_front_page()) {
+        //     wp_enqueue_script(
+        //         'jssor',
+        //         get_stylesheet_directory_uri() . '/js/jssor.js',
+        //         array( 'jquery' )
+        //     );
+
+        //     wp_enqueue_script(
+        //         'jssorslider',
+        //         get_stylesheet_directory_uri() . '/js/jssor.slider.js',
+        //         array( 'jquery' )
+        //     );
+        // }
+
+        // wp_enqueue_script('jquery-ui-accordion');
+    // }
+    // add_action( 'wp_enqueue_scripts', 'lowermedia_scripts' );
+
+    function lowermedia_enqueue_parent_style() {
+        wp_enqueue_style( 'parent-style', get_template_directory_uri() . '/style.css' );
+    }
+    add_action( 'wp_enqueue_scripts', 'lowermedia_enqueue_parent_style' );
+
+
+/*
+#
 #   ADD CUSTOM CONTENT TYPES 
 #
 */
@@ -122,41 +159,6 @@
     // add_action( 'save_post', 'lm_save_meta_box_data' );
 
 
-/*
-#
-#   REGISTER JS AND CSS
-#
-*/
-
-    function lowermedia_scripts() {
-        // wp_enqueue_script(
-        //     'custom-js',
-        //     get_stylesheet_directory_uri() . '/custom.js',
-        //     array( 'jquery' )
-        // );
-
-        // if (is_front_page()) {
-        //     wp_enqueue_script(
-        //         'jssor',
-        //         get_stylesheet_directory_uri() . '/js/jssor.js',
-        //         array( 'jquery' )
-        //     );
-
-        //     wp_enqueue_script(
-        //         'jssorslider',
-        //         get_stylesheet_directory_uri() . '/js/jssor.slider.js',
-        //         array( 'jquery' )
-        //     );
-        // }
-
-        // wp_enqueue_script('jquery-ui-accordion');
-    }
-    add_action( 'wp_enqueue_scripts', 'lowermedia_scripts' );
-
-    function lowermedia_enqueue_parent_style() {
-        wp_enqueue_style( 'parent-style', get_template_directory_uri() . '/style.css' );
-    }
-    add_action( 'wp_enqueue_scripts', 'lowermedia_enqueue_parent_style' );
 
 /*
 #
@@ -164,13 +166,15 @@
 #   http://css-tricks.com/snippets/wordpress/make-archives-php-include-custom-post-types/
 #
 */
+/*
 
+    --    ADD CUSTOM POST TYPES HERE   --
+
+*/
     function namespace_add_custom_types( $query ) {
       if( is_category() || is_tag() && empty( $query->query_vars['suppress_filters'] ) ) {
-        $query->set( 'post_type', array(
-         'post', 'products'
-            ));
-          return $query;
+            $query->set( 'post_type', array( 'post', 'post-type-name' ));
+            return $query;
         }
     }
     add_filter( 'pre_get_posts', 'namespace_add_custom_types' );
@@ -181,7 +185,11 @@
 #   The hook needed to search ALL content
 #
 */
+/*
 
+    --    ADD CUSTOM POST TYPES HERE   --
+
+*/
     function searchAll( $query ) {
         if ( $query->is_search ) {
             $query->set( 'post_type', array( 'post', 'page', 'feed', 'products', 'people'));
