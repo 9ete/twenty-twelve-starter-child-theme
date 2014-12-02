@@ -13,9 +13,40 @@
 /* =Theme customization starts here
 -------------------------------------------------------------- */
 
-body { background:white; }
+/* 
+-- H/P/A -- 
+-- BODY/WRAP -- 
+-- HEADER --
+-- NAVIGATION --
+-- SIDEBAR --
+-- CONTENT --
+-- FOOTER --
+-- MEDIA QUERIES -- 
+*/
 
-body .site {
-	box-shadow: none;
-	background: none;
-}
+
+
+/* -- H/P/A -- */
+
+/* -- BODY/WRAP -- */
+
+	body { background:white; }
+
+	body .site {
+			box-shadow: none;
+			background: none;
+		}
+
+/* -- HEADER -- */
+
+/* -- NAVIGATION -- */
+
+/* -- SIDEBAR -- */
+
+/* -- CONTENT -- */
+
+/* -- FOOTER -- */
+
+/* -- MEDIA QUERIES -- */
+
+/* -- -- -- -- -- -- -- -- -- -- -- -- END -- -- -- -- -- -- -- -- -- -- -- -- */
