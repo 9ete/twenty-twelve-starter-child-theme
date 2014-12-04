@@ -31,10 +31,10 @@
     // }
     // add_action( 'wp_enqueue_scripts', 'lowermedia_scripts' );
 
-    function lowermedia_enqueue_parent_style() {
-        wp_enqueue_style( 'parent-style', get_template_directory_uri() . '/style.css' );
-    }
-    add_action( 'wp_enqueue_scripts', 'lowermedia_enqueue_parent_style' );
+    // function lowermedia_enqueue_parent_style() {
+    //     wp_enqueue_style( 'parent-style', get_template_directory_uri() . '/style.css' );
+    // }
+    // add_action( 'wp_enqueue_scripts', 'lowermedia_enqueue_parent_style' );
 
 
 /*
@@ -470,21 +470,6 @@
     }
     add_action( 'init', 'lowermedia_menus_init' );
 
-/*
-#
-#   SPEED OPTIMIZATIONS
-#   -Load all fonts from google
-#
-#
-*/
-
-    function load_fonts() {
-        wp_dequeue_style( 'twentytwelve-fonts' );
-        wp_deregister_style( 'twentytwelve-fonts' );
-        wp_register_style('googleFonts', 'http://fonts.googleapis.com/css?family=Signika:400,700|Open+Sans:400italic,700italic,400,700&amp;subset=latin,latin-ext');
-        wp_enqueue_style( 'googleFonts');
-    }
-    add_action('wp_print_styles', 'load_fonts');
 
 /*
 #   Create widget info for above function: lm_add_dashboard_widgets
@@ -566,6 +551,50 @@
 */
 
     add_filter('widget_text', 'do_shortcode');
+
+/*
+# SPEED OPTIMIZATIONS
+# 
+*/
+
+// Remove jquery migrate as is not needed
+if(!is_admin()) add_filter( 'wp_default_scripts', 'dequeue_jquery_migrate' );
+function dequeue_jquery_migrate( &$scripts){
+    $scripts->remove( 'jquery');
+    $scripts->add( 'jquery', false, array( 'jquery-core' ), '1.10.2' );
+}
+
+//load jquery from google
+if (!is_admin()) add_action("wp_enqueue_scripts", "lowermedia_jquery_enqueue", 11);
+function lowermedia_jquery_enqueue() {
+    wp_deregister_script('jquery');
+    // wp_register_script('jquery', "http" . ($_SERVER['SERVER_PORT'] == 443 ? "s" : "") . "://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js", false, null, true);
+    wp_register_script('jquery', "http" . ($_SERVER['SERVER_PORT'] == 443 ? "s" : "") . "://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js", false, null, true);
+    wp_enqueue_script('jquery');
+}
+
+//added lazy load styles to style.css so deregister
+// add_action( 'wp_print_styles', 'lowermedia_deregister_styles', 100 );
+// function lowermedia_deregister_styles() {
+//   wp_deregister_style( 'image-lazy-load-frontend' );
+// }
+
+/*
+#
+#   SPEED OPTIMIZATIONS
+#   -Load all fonts from google
+#
+#
+*/
+
+    function load_fonts() {
+        wp_dequeue_style( 'twentytwelve-fonts' );
+        wp_deregister_style( 'twentytwelve-fonts' );
+        wp_register_style('googleFonts', 'http://fonts.googleapis.com/css?family=Signika:400,700|Open+Sans:400italic,700italic,400,700&amp;subset=latin,latin-ext');
+        wp_enqueue_style( 'googleFonts');
+    }
+    add_action('wp_print_styles', 'load_fonts');
+
 
 /*
 #
