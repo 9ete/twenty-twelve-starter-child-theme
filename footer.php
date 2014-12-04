@@ -14,7 +14,7 @@
 
 <footer id="colophon" role="contentinfo">
 	<div class="site-info">
-		
+		<h4>A LowerMedia Site - &copy;<?php echo date("Y"); ?></h4>
 	</div><!-- .site-info -->
 </footer><!-- #colophon -->
 
