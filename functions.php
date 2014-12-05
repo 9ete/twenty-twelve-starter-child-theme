@@ -399,7 +399,7 @@
         body { font-family: Futura, "Trebuchet MS", Arial, sans-serif; }
         h1 a 
         { 
-            background-image:url('.get_stylesheet_directory_uri().'/img/european-motors-menu-logo.png) !important; 
+            background-image:url('.get_stylesheet_directory_uri().'/img/logo.png) !important; 
             background-size: 211px auto !important;
             height: 200px !important;
             width: 311px !important; 
