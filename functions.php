@@ -375,7 +375,7 @@
 
            
            /*change admin menu coloring*/ 
-            #adminmenu, #adminmenu .wp-submenu, #adminmenuback, #adminmenuwrap { background-color: #043789; }
+            #adminmenu, #adminmenu .wp-submenu, #adminmenuback, #adminmenuwrap { /*background-color: #043789;*/ }
 
             #adminmenu .wp-submenu a {color: rgba(249,190,25,0.6);}
 
