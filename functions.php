@@ -407,7 +407,7 @@
             padding-bottom: 0 !important; 
         }
         .login form { margin-top: 10px !important; border: 1px solid #f9be19; }
-        .login {background:#043789;}
+        .login {background:#333;}
         </style>';
     }
     add_action('login_head', 'lm_custom_login_logo');
